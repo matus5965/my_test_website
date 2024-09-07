@@ -2,6 +2,18 @@
 <html>
   <head>
     <style>
+      @property --first-color {
+        syntax: "<color>";
+        inherits: true;
+        initial-value: red;
+      }
+
+      @property --second-color {
+        syntax: "<color>";
+        inherits: true;
+        initial-value: blue;
+      }
+
       body {
         margin: 0;
         padding: 0;
@@ -16,14 +28,46 @@
         box-shadow: 0em 0.5em 1em black;
       }
 
+      header h1 {
+        background-image: linear-gradient(
+          90deg,
+          var(--first-color),
+          var(--second-color)
+        );
+        background-clip: text;
+        color: transparent;
+        animation: gradientAlternating 10s linear infinite;
+      }
+
+      @keyframes gradientAlternating {
+        50% {
+          --first-color: blue;
+          --second-color: red;
+        }
+
+        100% {
+          --first-color: red;
+          --second-color: blue;
+        }
+      }
       main {
         padding: 2em;
       }
 
       #bug-button {
+        width: 5em;
+        height: 2em;
         outline: none;
-        border: none:
+        border: none;
+        color: white;
         background-color: inherit;
+      }
+
+      main a:hover {
+        cursor: default;
+      }
+      #bug-button:hover {
+        cursor: default;
       }
     </style>
   </head>
@@ -66,8 +110,7 @@
         </p>
       </section>
       <a href="https://www.google.com/">
-        <button id="bug-button">
-        </button>
+        <button id="bug-button"></button>
       </a>
     </main>
   </body>
